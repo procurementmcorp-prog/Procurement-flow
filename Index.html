@@ -1,0 +1,1064 @@
+﻿<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRP PRO - Satınalma axını</title>
+<style>
+:root{
+  --bg:#f4f7fb;--card:#ffffff;--text:#101828;--muted:#667085;--line:#e5e7eb;
+  --blue:#2563eb;--blue2:#1d4ed8;--nav:#0b1220;--green:#16a34a;--red:#dc2626;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:linear-gradient(180deg,#f4f7fb,#eef3fb);color:var(--text)}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.side{background:linear-gradient(180deg,#0b1220,#111827);color:white;padding:20px;position:sticky;top:0;height:100vh}
+.logo{font-size:25px;font-weight:900;margin-bottom:6px}
+.sub{font-size:13px;color:#b6c2d6;margin-bottom:22px;line-height:1.4}
+.nav button{width:100%;border:0;background:transparent;color:#dbeafe;text-align:left;padding:14px;border-radius:16px;font-size:15px;margin:5px 0;cursor:pointer;font-weight:800}
+.nav button.active,.nav button:hover{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff}
+.main{padding:22px;overflow:auto}
+.head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}
+h1{font-size:27px;margin:0;letter-spacing:-.5px}
+h3{margin:0 0 12px;font-size:17px}
+.badge{background:#dbeafe;color:#1d4ed8;padding:8px 12px;border-radius:999px;font-weight:900;font-size:12px}
+.card{background:white;border:1px solid var(--line);border-radius:24px;padding:18px;margin-bottom:16px;box-shadow:0 14px 36px rgba(16,24,40,.08)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px;font-weight:800}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:15px;padding:14px 13px;font-size:16px;background:#fff;outline:none}
+input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{border:0;border-radius:15px;padding:13px 16px;font-weight:900;cursor:pointer;font-size:14px}
+.primary{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white}
+.ghost{background:#eef2ff;color:#1d4ed8}.ok{background:#dcfce7;color:#166534}.danger{background:#fee2e2;color:#991b1b}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid var(--line);border-radius:20px;padding:15px}
+.kpi b{font-size:23px}.kpi span{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-top:5px}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:18px;background:#fff;max-height:70vh}
+table{border-collapse:collapse;width:max-content;min-width:100%;font-size:13px}
+th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:middle;white-space:nowrap}
+th{background:#f8fafc;color:#475569;position:sticky;top:0;z-index:1;font-size:12px}
+.psname{white-space:normal;min-width:300px;line-height:1.35}
+.small{font-size:13px;color:var(--muted);line-height:1.45}
+.hidden{display:none}.okrow{background:#ecfdf5}
+.printBox{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px;overflow:auto}
+.rfqsheet{width:190mm;max-width:100%;margin:0 auto;background:#dcdcdc;color:#000;font-family:"Times New Roman",serif;font-size:14px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.rfqsheet table{width:100%;border-collapse:collapse;table-layout:fixed}
+.rfqsheet td,.rfqsheet th{border:1.5px solid #000;padding:3px 5px;white-space:normal;vertical-align:middle}
+.rfqsheet i{font-style:italic;font-weight:400}
+.rfqMain{font-size:34px;font-weight:700;text-align:center;line-height:1.1}
+.rfqSub{font-size:18px;font-style:italic;text-align:center;line-height:1.1}
+.rfqGray{background:#cfcfcf}
+.rfqBlock{font-size:21px;font-weight:700;text-align:center;line-height:1.2}
+.rfqLabel{font-weight:700;text-align:right}
+.rfqHeader2{font-size:20px;font-weight:700;text-align:center;line-height:1.2}
+.rfqDataCell{text-align:center}
+.rfqNoCell{font-weight:700;text-align:left}
+.mvsheet{width:1320px;margin:0 auto;background:#fff;color:#000;font-family:Calibri,Arial,sans-serif;font-size:11px}
+.mvsheet table{width:100%;border-collapse:collapse;table-layout:fixed}
+.mvsheet td,.mvsheet th{border:1px solid #000;padding:4px;white-space:normal}
+.mvh{background:#d9eaf7;font-weight:700;text-align:center}
+.mvh2{background:#eef3fb;font-weight:700;text-align:center}
+.mvsum{background:#f3f4f6;font-weight:700}
+#compareTable.mvExact{background:#d9d9d9;font-family:"Times New Roman",serif;font-size:12px}
+#compareTable.mvExact th,#compareTable.mvExact td{border:1px solid #222;padding:2px 4px;position:static!important}
+#compareTable.mvExact .mvTitle{font-size:32px;font-weight:700;background:#efefef;text-align:center}
+#compareTable.mvExact .mvCompany{font-size:56px;font-weight:700;background:#efefef;text-align:center;line-height:1}
+#compareTable.mvExact .mvh{background:#d7d7d7;font-weight:700;text-align:center}
+#compareTable.mvExact .mvh2{background:#e3e3e3;font-weight:700;text-align:center}
+#compareTable.mvExact .mvBlk{background:#000;color:#fff;font-size:9px;font-weight:700;text-align:center}
+#compareTable.mvExact .mvEmpty{background:#ececec}
+#compareTable.mvExact .moneyRed{color:#c00000;font-weight:700}
+#compareTable.mvExact .moneyBlue{color:#0070c0;font-weight:700}
+#compareTable.mvExact .moneyGreen{color:#00a651;font-weight:700}
+#compareTable.mvExact .award{background:#efefef}
+#compareTable.mvExact .awardTxt{color:#c00000;font-style:italic;font-weight:700}
+#compareTable.mvExact .bad{color:#c00000;font-style:italic}
+#compareTable.mvExact .good{font-weight:700}
+#mvPrintArea .mvExact{background:#d9d9d9;font-family:"Times New Roman",serif;font-size:12px;width:100%;border-collapse:collapse;table-layout:fixed}
+#mvPrintArea .mvExact th,#mvPrintArea .mvExact td{border:1px solid #222;padding:2px 4px}
+#mvPrintArea .mvTitle{font-size:32px;font-weight:700;background:#efefef;text-align:center}
+#mvPrintArea .mvCompany{font-size:56px;font-weight:700;background:#efefef;text-align:center;line-height:1}
+#mvPrintArea .mvh{background:#d7d7d7;font-weight:700;text-align:center}
+#mvPrintArea .mvh2{background:#e3e3e3;font-weight:700;text-align:center}
+#mvPrintArea .mvBlk{background:#000;color:#fff;font-size:9px;font-weight:700;text-align:center}
+#mvPrintArea .mvEmpty{background:#ececec}
+#mvPrintArea .moneyRed{color:#c00000;font-weight:700}
+#mvPrintArea .moneyBlue{color:#0070c0;font-weight:700}
+#mvPrintArea .moneyGreen{color:#00a651;font-weight:700}
+#mvPrintArea .award{background:#efefef}
+#mvPrintArea .awardTxt{color:#c00000;font-style:italic;font-weight:700}
+#mvPrintArea .bad{color:#c00000;font-style:italic}
+#mvPrintArea .good{font-weight:700}
+.center{text-align:center}.right{text-align:right}.bold{font-weight:700}
+@media print{
+  body *{visibility:hidden!important}
+  body[data-print-target="rfq"] #rfqPrintArea,body[data-print-target="rfq"] #rfqPrintArea *{visibility:visible!important}
+  body[data-print-target="rfq"] #rfqPrintArea{position:absolute;left:0;top:0;width:100%;border:0;padding:0}
+  body[data-print-target="rfq"] .rfqsheet{width:190mm;max-width:none;font-size:14px}
+  body[data-print-target="mv"] #mvPrintArea,body[data-print-target="mv"] #mvPrintArea *{visibility:visible!important}
+  body[data-print-target="mv"] #mvPrintArea{position:absolute;left:0;top:0;width:100%;border:0;padding:0}
+  body[data-print-target="mv"] .mvsheet{width:100%;font-size:10.5px}
+  @page{size:A4 portrait;margin:8mm}
+}
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}.side{height:auto;position:relative;padding:16px}.main{padding:14px}
+  .grid,.summary{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}
+  .nav{display:grid;grid-template-columns:1fr 1fr;gap:6px}.nav button{margin:0;font-size:14px}
+  .btn{width:100%;padding:15px}h1{font-size:23px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="logo">PRP PRO</div>
+  <div class="sub">Tələbnamə → RFQ → Təklif → PS IQLIM</div>
+  <div class="nav">
+    <button onclick="showPage('overview',this)">İcmal</button>
+    <button class="active" onclick="showPage('form',this)">+ Tələbnamə</button>
+    <button onclick="showPage('rfq',this)">RFQ yarat</button>
+    <button onclick="showPage('offers',this)">Təklifləri işlə</button>
+    <button onclick="showPage('ps',this)">PS IQLIM məlumatları</button>
+  </div>
+</aside>
+
+<main class="main">
+<section id="overviewPage" class="hidden">
+  <div class="head"><h1>İcmal</h1><span class="badge">Ümumi nəzarət</span></div>
+  <div class="card">
+    <h3>İcmal paneli</h3>
+    <div class="summary">
+      <div class="kpi"><b id="ovReq">0</b><span>Tələbnamə sayı</span></div>
+      <div class="kpi"><b id="ovReqLines">0</b><span>Tələb sətri</span></div>
+      <div class="kpi"><b id="ovRFQ">0</b><span>RFQ sayı</span></div>
+      <div class="kpi"><b id="ovOverdue">0</b><span>Gecikən RFQ</span></div>
+      <div class="kpi"><b id="ovPayPending">0</b><span>Ödəniş gözləyən</span></div>
+      <div class="kpi"><b id="ovOffers">0</b><span>Təklif sətri</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Gecikən RFQ-lər</h3>
+    <div class="tablewrap"><table id="overdueTable"></table></div>
+  </div>
+  <div class="card">
+    <h3>Ödəniş İzləmə</h3>
+    <div class="tablewrap"><table id="paymentTable"></table></div>
+  </div>
+</section>
+
+<section id="formPage">
+  <div class="head"><h1>Tələbnamə yarat</h1><span class="badge">Sadə və sürətli</span></div>
+  <div class="card">
+    <div class="grid">
+      <div class="field"><label>Hüquqi şəxs</label><select id="legal"><option>İQLİM EİM MMC</option><option>İQLİM SPE LLC</option><option>AZƏRSİLAH QSC</option></select></div>
+      <div class="field"><label>S/bölmə</label><input id="subunit" value="TMZ"></div>
+      <div class="field"><label>İcraçı</label><input id="owner" value="Tural A."></div>
+      <div class="field"><label>Tələbnamə №</label><input id="prno"></div>
+      <div class="field"><label>Bölmə</label><input id="dept" placeholder="Məs: Mexanika şöbəsi"></div>
+      <div class="field"><label>Tarix</label><input type="date" id="date"></div>
+      <div class="field"><label>İcraya başlanma tarixi</label><input type="date" id="startdate"></div>
+      <div class="field"><label>Ümumi kateqoriya</label><select id="maincat"></select></div>
+    </div>
+    <p class="small">Mövcud qalıq və qiymət yoxdur. Yalnız tələb olunan mal məlumatı daxil edilir.</p>
+  </div>
+
+  <div class="card">
+    <h3>Sürətli mal əlavə et</h3>
+    <div class="grid">
+      <div class="field"><label>Kateqoriya</label><select id="quickCat"></select></div>
+      <div class="field"><label>Mal adı</label><input id="quickName" placeholder="Malın adını yaz"></div>
+      <div class="field"><label>Ölçü vahidi</label><select id="quickUom"></select></div>
+      <div class="field"><label>Miqdar</label><input id="quickQty" type="number" value="1"></div>
+    </div>
+    <div class="btns">
+      <button class="btn primary" onclick="quickAdd()">Siyahıya əlavə et</button>
+      <button class="btn ghost" onclick="addSample()">Nümunə</button>
+      <button class="btn ok" onclick="savePR()">PS IQLIM-ə yaz</button>
+      <button class="btn danger" onclick="clearForm()">Formu təmizlə</button>
+    </div>
+  </div>
+
+  <div class="card summary">
+    <div class="kpi"><b id="lineCount">0</b><span>Mal sətri</span></div>
+    <div class="kpi"><b id="totalQty">0</b><span>Ümumi miqdar</span></div>
+    <div class="kpi"><b id="totalCats">0</b><span>Kateqoriya sayı</span></div>
+    <div class="kpi"><b id="totalFinal">0</b><span>Alınacaq miqdar</span></div>
+  </div>
+
+  <div class="card">
+    <div class="tablewrap">
+      <table><thead><tr><th>#</th><th>Kateqoriya</th><th>Mal adı</th><th>Vahid</th><th>Miqdar</th><th>Qeyd</th><th>Sil</th></tr></thead><tbody id="tbody"></tbody></table>
+    </div>
+  </div>
+</section>
+
+<section id="rfqPage" class="hidden">
+  <div class="head"><h1>RFQ yarat</h1><span class="badge">PS IQLIM üzrə filtrlə</span></div>
+  <div class="card">
+    <div class="grid">
+      <div class="field"><label>RFQ №</label><input id="rfqNo"></div>
+      <div class="field"><label>RFQ tarixi</label><input type="date" id="rfqDate"></div>
+      <div class="field"><label>Kateqoriya</label><select id="rfqCategory" onchange="renderRFQSource()"></select></div>
+      <div class="field"><label>Son təklif tarixi</label><input type="date" id="rfqDeadline"></div>
+      <div class="field"><label>Incoterms</label><select id="rfqIncoterms"><option>EXW</option><option>FCA</option><option>CPT</option><option>DAP</option><option>DDP</option></select></div>
+      <div class="field"><label>Ödəniş şərti</label><input id="rfqPayment" placeholder="Məs: 100% advance"></div>
+      <div class="field"><label>Qeyd</label><input id="rfqNote"></div>
+    </div>
+    <div class="btns">
+      <button class="btn primary" onclick="createRFQ()">Seçilənlərdən RFQ yarat</button>
+      <button class="btn ghost" onclick="selectAllRFQ(true)">Hamısını seç</button>
+      <button class="btn ghost" onclick="selectAllRFQ(false)">Seçimi sil</button>
+      <button class="btn ok" onclick="printRFQ()">RFQ çap et / PDF</button>
+    </div>
+  </div>
+  <div class="card"><h3>RFQ üçün PS sətirləri</h3><div class="tablewrap"><table id="rfqSourceTable"></table></div></div>
+  <div class="card"><h3>Yaradılmış RFQ-lər</h3><div class="tablewrap"><table id="rfqListTable"></table></div></div>
+  <div class="card"><h3>RFQ çap görünüşü</h3><div id="rfqPrintArea" class="printBox"></div></div>
+</section>
+
+<section id="offersPage" class="hidden">
+  <div class="head"><h1>Təklifləri işlə</h1><span class="badge">RFQ üzrə qiymətlər</span></div>
+  <div class="card">
+    <div class="grid">
+      <div class="field"><label>RFQ seç</label><select id="offerRFQ" onchange="renderOfferItems()"></select></div>
+      <div class="field"><label>Təchizatçı</label><input id="offerVendor" list="offerVendorList" oninput="onOfferVendorChange()"><datalist id="offerVendorList"></datalist></div>
+      <div class="field"><label>Təklif tarixi</label><input type="date" id="offerDate"></div>
+      <div class="field"><label>Valyuta</label><select id="offerCurrency"><option>AZN</option><option>USD</option><option>EUR</option><option>RUB</option><option>TRY</option></select></div>
+      <div class="field"><label>Çatdırılma müddəti</label><input id="offerLead"></div>
+      <div class="field"><label>Incoterms</label><select id="offerInc"><option>EXW</option><option>FCA</option><option>CPT</option><option>DAP</option><option>DDP</option></select></div>
+      <div class="field"><label>Ödəniş şərti</label><input id="offerPayment"></div>
+      <div class="field"><label>Qeyd</label><input id="offerNote"></div>
+    </div>
+    <div class="btns">
+      <button class="btn primary" onclick="saveOffer()">Təklifi yadda saxla</button>
+      <button class="btn ok" onclick="exportMVExcel()">MV ixrac et</button>
+      <button class="btn danger" onclick="clearOffers()">Təklifləri sil</button>
+    </div>
+  </div>
+  <div class="card"><h3>RFQ sətirləri üzrə qiymət</h3><div class="tablewrap"><table id="offerItemsTable"></table></div></div>
+  <div class="card"><h3>Müqayisə cədvəli</h3><div class="tablewrap"><table id="compareTable"></table></div></div>
+  <div class="card"><h3>Yadda saxlanmış təkliflər</h3><div class="tablewrap"><table id="offersTable"></table></div></div>
+</section>
+
+<section id="psPage" class="hidden">
+  <div class="head"><h1>PS IQLIM məlumatları</h1><span class="badge">Canlı məlumat</span></div>
+  <div class="card">
+    <div class="btns">
+      <button class="btn primary" onclick="showPage('form')">+ Yeni tələbnamə</button>
+      <button class="btn ghost" onclick="exportPS()">CSV ixrac et</button>
+      <button class="btn ghost" onclick="pickDataFolder()">Qovluq seç (məlumat)</button>
+      <button class="btn ghost" onclick="useBrowserStorage()">Brauzer yaddaşı</button>
+      <button class="btn danger" onclick="clearPS()">PS məlumatlarını sil</button>
+    </div>
+    <p class="small"><b>Yaddaş:</b> <span id="storageStatus">Brauzer yaddaşı (localStorage)</span></p>
+    <p class="small"><b>Status:</b> <span id="psStatus">0 sətir</span></p>
+  </div>
+  <div class="card"><div class="tablewrap"><table id="psTable"></table></div></div>
+</section>
+</main>
+</div>
+
+<script>
+const cats=["Alətlər","Elektrik məhsulları","Polimerlər","Avtomatika və elektronika","Metallar və Alaşımlar","Ehtiyat hissələri","Digər"];
+const uoms=["ədəd","metr","kg","litr","dəst","paket","rulon"];
+const psHeaders=["Hüquqi şəxs","S/bölmə","İcraçı","Tələbnamə №","Bölmə","Tarix","İcraya başlanma tarixi","Kateqoriya","S/Q-S","Nomenklatura adı/açıqlaması","Ölçü vahidi","Tələb miqdarı","İllik tələbat","Mövcud qalıq","Yekun miqdar","EOQ","EOQ CEM","Qiymət","Məbləğ","ƏDV","Əlavə vergi","ƏDV 18%","Cəm","Valyuta","AZN məbləğ","Şirkətin adı","Ölkə","Müqavilə№/Tarixi/Əlavə№ və tarixi","PO №","Sifariş tarixi","Çatdırılma vaxt","Incoterms","Ödəniş şərti","Satınalma tipi","Qərar","Mərhələ","Təxmin edilən tamamlanma vaxtı","Ödəniş tarixi","Tamamlanma tarixi","Əlavə qeyd/Sənəd statusu","RFQ","MV"];
+const storageKeys={lines:"mcrs_pr_lines",psRows:"mcrs_ps_rows",rfqs:"mcrs_rfqs",offers:"mcrs_offers"};
+const storageModeKey="mcrs_storage_mode";
+const storageFolderNameKey="mcrs_storage_folder_name";
+const folderDataFileName="mcrs_pro_data.json";
+const MV_VENDOR_SLOTS=10;
+let lines=[],psRows=[],rfqs=[],offers=[];
+let storageMode=(localStorage.getItem(storageModeKey)==="folder")?"folder":"browser";
+let storageDirHandle=null;
+
+function today(){return new Date().toISOString().slice(0,10)}
+function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;")}
+function parseArray(raw){
+  try{const parsed=JSON.parse(raw||"[]");return Array.isArray(parsed)?parsed:[];}
+  catch{return [];}
+}
+function normalizePSRow(row){
+  if(!row||typeof row!=="object") return row;
+  if((row["İcraçı"]===undefined||row["İcraçı"]===null||row["İcraçı"]==="")&&row["Icraçı"]!==undefined){
+    row["İcraçı"]=row["Icraçı"];
+  }
+  if((row["AZN məbləğ"]===undefined||row["AZN məbləğ"]===null||row["AZN məbləğ"]==="")&&row["AZN mebleğ"]!==undefined){
+    row["AZN məbləğ"]=row["AZN mebleğ"];
+  }
+  return row;
+}
+function loadFromBrowserStorage(){
+  lines=parseArray(localStorage.getItem(storageKeys.lines));
+  psRows=parseArray(localStorage.getItem(storageKeys.psRows)).map(normalizePSRow);
+  rfqs=parseArray(localStorage.getItem(storageKeys.rfqs));
+  offers=parseArray(localStorage.getItem(storageKeys.offers));
+}
+function saveToBrowserStorage(){
+  localStorage.setItem(storageKeys.lines,JSON.stringify(lines));
+  localStorage.setItem(storageKeys.psRows,JSON.stringify(psRows));
+  localStorage.setItem(storageKeys.rfqs,JSON.stringify(rfqs));
+  localStorage.setItem(storageKeys.offers,JSON.stringify(offers));
+}
+function dataSnapshot(){return {lines,psRows,rfqs,offers};}
+function applySnapshot(data){
+  if(!data||typeof data!=="object") return;
+  lines=Array.isArray(data.lines)?data.lines:[];
+  psRows=Array.isArray(data.psRows)?data.psRows.map(normalizePSRow):[];
+  rfqs=Array.isArray(data.rfqs)?data.rfqs:[];
+  offers=Array.isArray(data.offers)?data.offers:[];
+}
+function updateStorageStatus(extra){
+  if(typeof storageStatus==="undefined") return;
+  if(storageMode==="folder"){
+    const folderLabel=storageDirHandle?.name||localStorage.getItem(storageFolderNameKey)||"seçilməyib";
+    storageStatus.textContent=`Qovluq rejimi (${folderLabel})${extra?` - ${extra}`:""}`;
+  }else{
+    storageStatus.textContent=`Brauzer yaddaşı (localStorage)${extra?` - ${extra}`:""}`;
+  }
+}
+async function ensureFolderPermission(mode){
+  if(!storageDirHandle) return false;
+  const q=await storageDirHandle.queryPermission({mode});
+  if(q==="granted") return true;
+  const req=await storageDirHandle.requestPermission({mode});
+  return req==="granted";
+}
+async function readSnapshotFromFolder(){
+  if(!storageDirHandle) return null;
+  const canRead=await ensureFolderPermission("read");
+  if(!canRead) throw new Error("Qovluq icazəsi verilmədi.");
+  let fileHandle;
+  try{fileHandle=await storageDirHandle.getFileHandle(folderDataFileName);}
+  catch{return null;}
+  const file=await fileHandle.getFile();
+  const text=await file.text();
+  if(!text.trim()) return null;
+  return JSON.parse(text);
+}
+async function writeSnapshotToFolder(){
+  if(storageMode!=="folder"||!storageDirHandle) return;
+  const canWrite=await ensureFolderPermission("readwrite");
+  if(!canWrite) throw new Error("Qovluq üçün yazma icazəsi yoxdur.");
+  const fh=await storageDirHandle.getFileHandle(folderDataFileName,{create:true});
+  const w=await fh.createWritable();
+  await w.write(JSON.stringify(dataSnapshot(),null,2));
+  await w.close();
+}
+function saveAll(){
+  saveToBrowserStorage();
+  updateStorageStatus();
+  if(storageMode==="folder"&&storageDirHandle){
+    writeSnapshotToFolder().catch(err=>{
+      console.error(err);
+      updateStorageStatus("yazma xətası");
+    });
+  }
+}
+async function pickDataFolder(){
+  if(!window.showDirectoryPicker){
+    alert("Bu brauzerdə qovluq seçimi dəstəklənmir.");
+    return;
+  }
+  try{
+    const handle=await window.showDirectoryPicker({mode:"readwrite"});
+    storageDirHandle=handle;
+    storageMode="folder";
+    localStorage.setItem(storageModeKey,"folder");
+    localStorage.setItem(storageFolderNameKey,handle.name||"qovluq");
+    updateStorageStatus("yoxlanır");
+
+    const fromFolder=await readSnapshotFromFolder();
+    if(fromFolder){
+      applySnapshot(fromFolder);
+    }else{
+      await writeSnapshotToFolder();
+    }
+
+    saveToBrowserStorage();
+    renderAll();
+    updateStorageStatus("aktivdir");
+    alert("Qovluq seçildi. Məlumat bu qovluqda mcrs_pro_data.json faylına yazılacaq.");
+  }catch(err){
+    console.error(err);
+    updateStorageStatus("xəta");
+    if(err&&err.name!=="AbortError") alert("Qovluq seçimində xəta oldu.");
+  }
+}
+function useBrowserStorage(){
+  storageMode="browser";
+  localStorage.setItem(storageModeKey,"browser");
+  updateStorageStatus("aktivdir");
+}
+function init(){
+  loadFromBrowserStorage();
+  date.value=today();startdate.value=today();rfqDate.value=today();offerDate.value=today();
+  prno.value=localStorage.getItem("mcrs_last_prno")||"PR-"+today().replaceAll("-","").slice(2)+"-001";
+  rfqNo.value=localStorage.getItem("mcrs_last_rfqno")||"RFQ-"+today().replaceAll("-","").slice(2)+"-001";
+  [maincat,quickCat].forEach(sel=>sel.innerHTML=cats.map(c=>`<option>${c}</option>`).join(""));
+  quickUom.innerHTML=uoms.map(u=>`<option>${u}</option>`).join("");
+  updateStorageStatus(storageMode==="folder"?"qovluq yenidən seçilməlidir":"aktivdir");
+  renderAll();
+}
+function showPage(page,btn){
+  overviewPage.classList.toggle("hidden",page!=="overview");
+  formPage.classList.toggle("hidden",page!=="form");
+  rfqPage.classList.toggle("hidden",page!=="rfq");
+  offersPage.classList.toggle("hidden",page!=="offers");
+  psPage.classList.toggle("hidden",page!=="ps");
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  else document.querySelectorAll(".nav button")[page==="overview"?0:page==="form"?1:page==="rfq"?2:page==="offers"?3:4].classList.add("active");
+  renderAll();
+}
+function quickAdd(){
+  if(!quickName.value.trim()){alert("Mal adı yaz");return}
+  const catVal=quickCat.value;
+  lines.push({cat:catVal,name:quickName.value.trim(),uom:quickUom.value,qty:+quickQty.value||1,note:""});
+  quickName.value="";quickQty.value=1;quickCat.value=catVal;
+  saveAll();renderForm();setTimeout(()=>quickName.focus(),80);
+}
+function addSample(){lines.push({cat:"Alətlər",name:"Künclük xətkeş 300x200mm",uom:"ədəd",qty:3,note:"Təcili"});saveAll();renderForm();}
+function delLine(i){lines.splice(i,1);saveAll();renderForm();}
+function setLine(i,k,v){if(lines[i]){lines[i][k]=v;saveAll();updateSummary();}}
+function updateSummary(){
+  lineCount.textContent=lines.length;
+  totalQty.textContent=lines.reduce((a,x)=>a+(+x.qty||0),0);
+  totalCats.textContent=[...new Set(lines.map(x=>x.cat))].length;
+  totalFinal.textContent=totalQty.textContent;
+}
+function renderForm(){
+  tbody.innerHTML=lines.map((x,i)=>`<tr>
+    <td>${i+1}</td>
+    <td><select onchange="setLine(${i},'cat',this.value)">${cats.map(c=>`<option ${x.cat===c?'selected':''}>${c}</option>`).join("")}</select></td>
+    <td><input value="${esc(x.name)}" onblur="setLine(${i},'name',this.value)" style="min-width:300px"></td>
+    <td><select onchange="setLine(${i},'uom',this.value)">${uoms.map(u=>`<option ${x.uom===u?'selected':''}>${u}</option>`).join("")}</select></td>
+    <td><input type="number" value="${x.qty}" onblur="setLine(${i},'qty',this.value)" style="min-width:90px"></td>
+    <td><input value="${esc(x.note)}" onblur="setLine(${i},'note',this.value)"></td>
+    <td><button class="btn danger" onclick="delLine(${i})">Sil</button></td>
+  </tr>`).join("");
+  updateSummary();
+}
+function pickVal(obj,keys){
+  for(const k of keys){
+    const v=obj&&obj[k];
+    if(v!==undefined&&v!==null&&String(v).trim()!=="") return v;
+  }
+  return "";
+}
+function toDate(v){
+  if(!v) return null;
+  if(v instanceof Date&&!isNaN(v)) return new Date(v.getFullYear(),v.getMonth(),v.getDate());
+  const s=String(v).trim();
+  if(!s) return null;
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){
+    const d=new Date(s+"T00:00:00");
+    return isNaN(d)?null:d;
+  }
+  if(/^\d{2}\/\d{2}\/\d{4}$/.test(s)){
+    const [dd,mm,yy]=s.split("/").map(Number);
+    const d=new Date(yy,mm-1,dd);
+    return isNaN(d)?null:d;
+  }
+  const d=new Date(s);
+  if(isNaN(d)) return null;
+  return new Date(d.getFullYear(),d.getMonth(),d.getDate());
+}
+function fmtDate(v){
+  const d=toDate(v);
+  if(!d) return String(v||"");
+  const dd=String(d.getDate()).padStart(2,"0");
+  const mm=String(d.getMonth()+1).padStart(2,"0");
+  const yy=d.getFullYear();
+  return `${dd}/${mm}/${yy}`;
+}
+function renderOverview(){
+  const prSet=new Set(psRows.map(r=>pickVal(r,["Tələbnamə №","Tələbnamə №"])).filter(Boolean));
+  const rfqList=rfqs||[];
+  const offerList=(offers||[]).map(normalizeOffer);
+  const todayDate=toDate(today())||new Date();
+  const overdue=rfqList.map(r=>{
+    const no=pickVal(r,["RFQ №","RFQ №"]);
+    const dead=toDate(pickVal(r,["Son təklif tarixi","Son təklif tarixi"]));
+    if(!dead) return null;
+    const diff=Math.floor((todayDate-dead)/(1000*60*60*24));
+    if(diff<=0) return null;
+    const cat=pickVal(r,["Kateqoriya"]);
+    const offerCount=offerList.filter(o=>o.rfqNo===no).length;
+    return {no,cat,dead,diff,offerCount};
+  }).filter(Boolean).sort((a,b)=>b.diff-a.diff);
+
+  const payMap=new Map();
+  offerList.forEach(o=>{
+    if(!o.rfqNo||!o.vendor) return;
+    const k=o.rfqNo+"||"+o.vendor;
+    if(!payMap.has(k)) payMap.set(k,{rfq:o.rfqNo,vendor:o.vendor,currency:o.currency||"AZN",totalAzn:0,payment:o.payment||"",pending:false});
+    const it=payMap.get(k);
+    it.totalAzn+=((+o.qty||0)*(+o.price||0)*fxRate(o.currency));
+    if(!String(o.payment||"").trim()||String(o.payment||"").trim()==="0") it.pending=true;
+    if(!it.payment&&o.payment) it.payment=o.payment;
+    if(!it.currency&&o.currency) it.currency=o.currency;
+  });
+  const payRows=[...payMap.values()].sort((a,b)=>(b.pending?1:0)-(a.pending?1:0));
+  const payPending=payRows.filter(x=>x.pending).length;
+
+  ovReq.textContent=prSet.size;
+  ovReqLines.textContent=psRows.length;
+  ovRFQ.textContent=rfqList.length;
+  ovOverdue.textContent=overdue.length;
+  ovPayPending.textContent=payPending;
+  ovOffers.textContent=offerList.length;
+
+  overdueTable.innerHTML="<thead><tr><th>RFQ №</th><th>Kateqoriya</th><th>Son tarix</th><th>Gecikmə (gün)</th><th>Təklif sayı</th></tr></thead><tbody>"+
+  overdue.map(x=>`<tr><td>${esc(x.no)}</td><td>${esc(x.cat)}</td><td>${esc(fmtDate(x.dead))}</td><td>${x.diff}</td><td>${x.offerCount}</td></tr>`).join("")+
+  (overdue.length?"":"<tr><td colspan='5'>Gecikən RFQ yoxdur.</td></tr>")+"</tbody>";
+
+  paymentTable.innerHTML="<thead><tr><th>RFQ №</th><th>Təchizatçı</th><th>Valyuta</th><th>Məbləğ (AZN)</th><th>Ödəniş şərti</th><th>Status</th></tr></thead><tbody>"+
+  payRows.map(x=>`<tr><td>${esc(x.rfq)}</td><td>${esc(x.vendor)}</td><td>${esc(x.currency)}</td><td>${x.totalAzn.toFixed(2)}</td><td>${esc(x.payment||'-')}</td><td>${x.pending?'Gözləyir':'Qeyd edilib'}</td></tr>`).join("")+
+  (payRows.length?"":"<tr><td colspan='6'>Ödəniş izləmə üçün təklif məlumatı yoxdur.</td></tr>")+"</tbody>";
+}
+function baseRow(line){
+  const r={};psHeaders.forEach(h=>r[h]="");
+  r["Hüquqi şəxs"]=legal.value;r["S/bölmə"]=subunit.value;r["İcraçı"]=owner.value;r["Tələbnamə №"]=prno.value;r["Bölmə"]=dept.value;r["Tarix"]=date.value;r["İcraya başlanma tarixi"]=startdate.value;
+  r["Kateqoriya"]=line.cat;r["S/Q-S"]="Tələbnamə";r["Nomenklatura adı/açıqlaması"]=line.name;r["Ölçü vahidi"]=line.uom;r["Tələb miqdarı"]=line.qty;r["Yekun miqdar"]=line.qty;r["Mərhələ"]="Tələbnamə";r["Əlavə qeyd/Sənəd statusu"]=line.note;
+  return r;
+}
+function savePR(){
+  if(!lines.length){alert("Mal əlavə et");return}
+  psRows.push(...lines.map(baseRow));
+  localStorage.setItem("mcrs_last_prno",prno.value);
+  lines=[];saveAll();renderAll();showPage("ps");
+}
+function clearForm(){if(confirm("Form təmizlənsin?")){lines=[];saveAll();renderForm();}}
+
+function catsFromPS(){const a=[...new Set(psRows.map(r=>r["Kateqoriya"]).filter(Boolean))];return a.length?a:cats}
+function renderRFQSource(){
+  const cur=rfqCategory.value;rfqCategory.innerHTML=catsFromPS().map(c=>`<option ${c===cur?'selected':''}>${c}</option>`).join("");
+  const cat=rfqCategory.value;
+  const rows=psRows.map((r,i)=>({...r,_idx:i})).filter(r=>r["Kateqoriya"]===cat&&!r["RFQ"]);
+  rfqSourceTable.innerHTML="<thead><tr><th>Seç</th><th>PR №</th><th>Bölmə</th><th>Mal adı</th><th>Vahid</th><th>Miqdar</th></tr></thead><tbody>"+
+  rows.map(r=>`<tr><td><input type="checkbox" class="rfqPick" value="${r._idx}"></td><td>${esc(r["Tələbnamə №"])}</td><td>${esc(r["Bölmə"])}</td><td class="psname">${esc(r["Nomenklatura adı/açıqlaması"])}</td><td>${esc(r["Ölçü vahidi"])}</td><td>${esc(r["Yekun miqdar"])}</td></tr>`).join("")+
+  (rows.length?"":"<tr><td colspan='6'>Bu kateqoriya üzrə RFQ-siz sətir yoxdur.</td></tr>")+"</tbody>";
+}
+function selectAllRFQ(v){document.querySelectorAll(".rfqPick").forEach(x=>x.checked=v)}
+function escRe(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
+function nextRFQNo(seed){
+  const dPrefix="RFQ-"+today().replaceAll("-","").slice(2)+"-";
+  let prefix=dPrefix,pad=3;
+  const m=String(seed||"").match(/^(.*-)(\d+)$/);
+  if(m){prefix=m[1];pad=m[2].length}
+  let max=0;
+  const re=new RegExp("^"+escRe(prefix)+"(\\d+)$");
+  rfqs.forEach(r=>{
+    const no=String(r["RFQ №"]||"");
+    const mm=no.match(re);
+    if(mm) max=Math.max(max,+mm[1]);
+  });
+  return prefix+String(max+1).padStart(pad,"0");
+}
+function ensureCategorySpecificRFQNo(no,cat){
+  const conflict=rfqs.find(r=>r["RFQ №"]===no && r["Kateqoriya"]!==cat);
+  if(!conflict) return no;
+  return nextRFQNo(no);
+}
+function createRFQ(){
+  const picked=[...document.querySelectorAll(".rfqPick:checked")].map(x=>+x.value);
+  if(!picked.length){alert("Sətir seç");return}
+  const cat=rfqCategory.value;
+  const entered=rfqNo.value.trim();
+  let no=entered||nextRFQNo();
+  const adjusted=ensureCategorySpecificRFQNo(no,cat);
+  if(adjusted!==no){
+    no=adjusted;
+    alert("Bu RFQ nömrəsi başqa kateqoriya üçün istifadə edilib. Yeni RFQ nömrəsi verildi: "+no);
+  }
+  rfqNo.value=no;
+  picked.forEach(i=>{psRows[i]["RFQ"]=no;psRows[i]["Mərhələ"]="RFQ";});
+  rfqs.push({"RFQ №":no,"Tarix":rfqDate.value,"Kateqoriya":cat,"Son təklif tarixi":rfqDeadline.value,"Incoterms":rfqIncoterms.value,"Ödəniş şərti":rfqPayment.value,"Sətir sayı":picked.length});
+  localStorage.setItem("mcrs_last_rfqno",no);saveAll();renderAll();alert(no+" yaradıldı.");
+}
+function renderRFQList(){
+  const h=["RFQ №","Tarix","Kateqoriya","Son təklif tarixi","Incoterms","Ödəniş şərti","Sətir sayı"];
+  rfqListTable.innerHTML="<thead><tr>"+h.map(x=>`<th>${x}</th>`).join("")+"</tr></thead><tbody>"+rfqs.map(r=>"<tr>"+h.map(x=>`<td>${esc(r[x])}</td>`).join("")+"</tr>").join("")+(rfqs.length?"":"<tr><td colspan='7'>RFQ yoxdur</td></tr>")+"</tbody>";
+}
+function renderRFQPrint(){
+  const rfq=rfqs.find(r=>r["RFQ №"]===rfqNo.value)||rfqs[rfqs.length-1]||{};
+  const no=rfq["RFQ №"]||rfqNo.value||"-";
+  const rows=psRows.filter(r=>r["RFQ"]===no);
+  const get=(obj,...keys)=>{for(const k of keys){if(obj&&obj[k]!==undefined&&obj[k]!==null&&obj[k]!=="") return obj[k]} return ""};
+  const fmtDate=(v)=>{const s=String(v||"");const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return `${m[3]}/${m[2]}/${m[1]}`;return s};
+  const category=get(rfq,"Kateqoriya")||rfqCategory.value||"";
+  const legalPrintMap={"İQLİM EİM MMC":"Iqlim EIM MMC","İQLİM SPE LLC":"Iqlim SPE LLC","AZƏRSİLAH QSC":"AZERSILAH QSC"};
+  const orderCompany=legalPrintMap[legal.value]||legal.value||"Iqlim EIM MMC";
+  const specialist=owner.value||"Abdullayev Tural";
+  const orderDate=fmtDate(get(rfq,"Tarix")||rfqDate.value||today());
+  const incoterms=get(rfq,"Incoterms")||"0";
+  const payment=get(rfq,"Ödəniş şərti")||rfqPayment.value||"0";
+  const address="Baku, Azerbaijan";
+  const email="tural.abdullayev@iqlimspe.com";
+  const callNo="+994 50 482 00 09";
+  const itemRows=rows.map((r,i)=>{
+    const code=`${i+1}-${get(r,"S/bölmə","S/bölmə")||"AZ"}-Protokol/`;
+    const desc=get(r,"Nomenklatura adı/açıqlaması","Nomenklatura adı/açıqlaması");
+    const unit=get(r,"Ölçü vahidi","Ölçü vahidi");
+    const qty=get(r,"Yekun miqdar");
+    return `<tr>
+      <td class="rfqNoCell">${esc(code)}</td>
+      <td>${esc(desc)}</td>
+      <td></td>
+      <td class="rfqDataCell">${esc(unit)}</td>
+      <td class="rfqDataCell">${esc(qty)}</td>
+      <td class="rfqDataCell">- &nbsp; ₼</td>
+      <td class="rfqDataCell">- &nbsp; ₼</td>
+    </tr>`;
+  }).join("") || `<tr><td></td><td></td><td></td><td></td><td></td><td class="rfqDataCell">- &nbsp; ₼</td><td class="rfqDataCell">- &nbsp; ₼</td></tr>`;
+  rfqPrintArea.innerHTML=`<div class="rfqsheet"><table>
+    <tr><th colspan="7" class="rfqMain">Təkliflər sorğusu</th></tr>
+    <tr><th colspan="7" class="rfqSub"><i>RFQ (Request For Quatotion)</i></th></tr>
+    <tr>
+      <th colspan="2" class="rfqGray center">Təkliflər sorğusu №<br><i>RFQ (Request For Quatotion)</i></th>
+      <th colspan="3" class="rfqGray center bold">RFQ- ${esc(no)}</th>
+      <th colspan="2" class="rfqGray center">“İqlim Elmi-İstehsalat Müəssisəsi” MMC</th>
+    </tr>
+    <tr><th colspan="7" class="rfqBlock">Alıcı şirkətin məlumatı<br><i>Buyer Information</i></th></tr>
+    <tr><td colspan="2" class="rfqLabel">Kateqoriya</td><td colspan="5">${esc(category)} ,</td></tr>
+    <tr><td colspan="7" style="height:10px"></td></tr>
+    <tr>
+      <td colspan="2" class="rfqLabel">Sifariş edən Müəssisə / Şəxs<br><i>Ordering Company / Individual</i></td>
+      <td colspan="2">${esc(orderCompany)}</td>
+      <td class="rfqLabel">Tarix<br><i>Date</i></td>
+      <td colspan="2">${esc(orderDate)}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="rfqLabel">Satınalma mütəxəssisi<br><i>Procurement specialist</i></td>
+      <td colspan="2">${esc(specialist)}</td>
+      <td class="rfqLabel">Ünvan<br><i>(Adress)</i></td>
+      <td colspan="2">${esc(address)}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="rfqLabel">Email adress</td>
+      <td colspan="2">${esc(email)}</td>
+      <td class="rfqLabel">Əlaqə №<br><i>Call number</i></td>
+      <td colspan="2">${esc(callNo)}</td>
+    </tr>
+    <tr><th colspan="7" class="rfqHeader2">Tələb olunan mallar (xidmətlər)<br><i>Goods/Services required</i></th></tr>
+    <tr class="rfqGray center">
+      <th>№</th>
+      <th>Satınalma predmetinin təsviri<br><i>Description of the Purchased Goods/Services</i></th>
+      <th>Xüsusiyyətlər<br><i>Specification</i></th>
+      <th>Ölçü vahidi<br><i>Unit</i></th>
+      <th>Miqdar<br><i>Quantity</i></th>
+      <th>Qiymət<br><i>Price</i></th>
+      <th>Cəm<br><i>Total</i></th>
+    </tr>
+    ${itemRows}
+    <tr><td></td><td></td><td></td><td></td><td></td><td class="center bold">Total</td><td class="center bold">0</td></tr>
+    <tr><td colspan="6" class="right">Əlavə xərclər (çatdırılma, quraşdırma və s.):<br><i>Additional Costs (delivery, installation, etc.):</i></td><td></td></tr>
+    <tr><td colspan="5"></td><td class="right">Vergi %:<br><i>Vat %:</i></td><td class="center">18% &nbsp;&nbsp; 0</td></tr>
+    <tr><td colspan="6" class="right">Ümumi məbləğ (ƏDV Daxil):</td><td class="center">0</td></tr>
+    <tr><th colspan="7" class="rfqBlock">Çatdırılma şərtləri və lazımi sənədlər barəsində məlumat<br><i>Information about delivery terms and required documents</i></th></tr>
+    <tr>
+      <td colspan="2" class="rfqLabel">Çatdırılma ünvanı:<br><i>Delivery adress</i></td><td colspan="2" class="center">${esc(address)}</td>
+      <td colspan="2" class="rfqLabel">Qiymətlərlə birlikdə kommersiya təklifi<br><i>Commercial Offer with Unit Prices</i></td><td class="center">Tələb olunur (Required)</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="rfqLabel">İncoterms:</td><td colspan="2" class="center">${esc(incoterms||"0")}</td>
+      <td colspan="2" class="rfqLabel">Məhsulların sertifikatı<br><i>Products certificat</i></td><td class="center">Tələb olunur (Required)</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="rfqLabel">Ödəniş şərti:<br><i>Payment terms</i></td><td colspan="2" class="center">${esc(payment||"0")}</td>
+      <td colspan="2" class="rfqLabel">Qeydiyyat sənədləri/Vöen<br><i>Company Registration / Tax ID</i></td><td class="center">Tələb olunur (Required)</td>
+    </tr>
+    <tr><th colspan="2">Məsul şəxs / Tutduğu Vəzifə</th><th colspan="2">Satınalma üzrə Aparıcı Mütəxəssis</th><th colspan="3">Təchizat Departamenti Satınalmalar şöbəsinin müdiri</th></tr>
+    <tr><th colspan="2">Ad, Soyad</th><td colspan="2" class="center">${esc(specialist)}</td><td colspan="3" class="center">Rafael İmanov</td></tr>
+    <tr><th colspan="2">İmza<br><i>Signature</i></th><td colspan="2" style="height:56px"></td><td colspan="3"></td></tr>
+  </table></div>`;
+}
+
+const offerKeys={
+  rfq:"RFQ №",
+  item:"Nomenklatura adı/açıqlaması",
+  uom:"Ölçü vahidi",
+  qty:"Təklif miqdarı",
+  price:"Vahid qiymət",
+  total:"Cəm",
+  currency:"Valyuta",
+  lead:"Çatdırılma müddəti",
+  payment:"Ödəniş şərti",
+  date:"Təklif tarixi"
+};
+function fxRate(cur){return ({AZN:1,USD:1.7,EUR:1.85,RUB:0.019,TRY:0.052}[cur]||1)}
+function normalizeOffer(o){
+  return {
+    rfqNo:o.rfqNo??o[offerKeys.rfq]??"",
+    vendor:o.vendor??o["Vendor"]??"",
+    item:o.item??o[offerKeys.item]??"",
+    uom:o.uom??o[offerKeys.uom]??"",
+    qty:+(o.qty??o[offerKeys.qty]??0)||0,
+    price:+(o.price??o[offerKeys.price]??0)||0,
+    currency:o.currency??o[offerKeys.currency]??"AZN",
+    lead:o.lead??o[offerKeys.lead]??"",
+    incoterms:o.incoterms??o["Incoterms"]??"",
+    payment:o.payment??o[offerKeys.payment]??"",
+    note:o.note??o["Qeyd"]??"",
+    date:o.date??o[offerKeys.date]??"",
+    brand:o.brand??o["Marka"]??"",
+    compliant:(o.compliant??o["Uyğunluq"]??true)!==false,
+    psIdx:(o.psIdx??o["_psIdx"]??null)
+  };
+}
+function denormalizeOffer(o){
+  const azn=o.price*fxRate(o.currency);
+  return {
+    rfqNo:o.rfqNo,vendor:o.vendor,item:o.item,uom:o.uom,qty:o.qty,price:o.price,currency:o.currency,lead:o.lead,incoterms:o.incoterms,payment:o.payment,note:o.note,date:o.date,brand:o.brand,compliant:o.compliant,psIdx:o.psIdx,azn,total:o.qty*o.price,
+    "Vendor":o.vendor,"Marka":o.brand,"Uyğunluq":o.compliant,"_psIdx":o.psIdx,
+    [offerKeys.rfq]:o.rfqNo,[offerKeys.date]:o.date,[offerKeys.item]:o.item,[offerKeys.uom]:o.uom,[offerKeys.qty]:o.qty,[offerKeys.price]:o.price,[offerKeys.total]:o.qty*o.price,[offerKeys.currency]:o.currency,[offerKeys.lead]:o.lead,"Incoterms":o.incoterms,[offerKeys.payment]:o.payment,"Qeyd":o.note
+  };
+}
+function offersForRFQ(no){return offers.map(normalizeOffer).filter(o=>o.rfqNo===no)}
+function vendorCurrencyForRFQ(no,vendor){
+  if(!vendor) return "";
+  return offersForRFQ(no).find(o=>o.vendor===vendor&&o.currency)?.currency||"";
+}
+function vendorLabelWithCurrency(no,vendor){
+  const cur=vendorCurrencyForRFQ(no,vendor);
+  return cur?`${vendor} (${cur})`:vendor;
+}
+function vendorsForRFQ(no){return [...new Set(offersForRFQ(no).map(o=>o.vendor).filter(Boolean))]}
+function updateOfferVendorList(){
+  const no=offerRFQ.value;
+  offerVendorList.innerHTML=vendorsForRFQ(no).map(v=>`<option value="${esc(v)}" label="${esc(vendorLabelWithCurrency(no,v))}"></option>`).join("");
+}
+function onOfferVendorChange(){
+  const no=offerRFQ.value;
+  updateOfferVendorList();
+  const cur=vendorCurrencyForRFQ(no,offerVendor.value.trim());
+  if(cur) offerCurrency.value=cur;
+  renderOfferItems();
+}
+function offerLookup(no,vendor,row){
+  const item=row["Nomenklatura adı/açıqlaması"],uom=row["Ölçü vahidi"];
+  return offersForRFQ(no).find(o=>o.vendor===vendor&&(o.psIdx===row._idx||(o.item===item&&o.uom===uom)));
+}
+function renderOfferRFQ(){
+  const cur=offerRFQ.value;
+  offerRFQ.innerHTML=rfqs.map(r=>`<option>${esc(r["RFQ №"])}</option>`).join("");
+  if(cur) offerRFQ.value=cur;
+}
+function offerRows(){const no=offerRFQ.value;return psRows.map((r,i)=>({...r,_idx:i})).filter(r=>r["RFQ"]===no)}
+function renderOfferItems(){
+  renderOfferRFQ();
+  const rows=offerRows();
+  const no=offerRFQ.value;
+  updateOfferVendorList();
+  const vendor=offerVendor.value.trim();
+  const cur=vendorCurrencyForRFQ(no,vendor);
+  if(cur) offerCurrency.value=cur;
+  offerItemsTable.innerHTML="<thead><tr><th>Mal adı</th><th>Vahid</th><th>Miqdar</th><th>Qiymət</th><th>Marka</th><th>Uyğun</th><th>Cəm</th></tr></thead><tbody>"+
+  rows.map(r=>{
+    const ex=vendor?offerLookup(no,vendor,r):null;
+    const qty=ex?ex.qty:(+r["Yekun miqdar"]||0);
+    const price=ex?ex.price:0;
+    const brand=ex?ex.brand:"";
+    const compliant=(ex?ex.compliant:true);
+    return `<tr>
+      <td class="psname">${esc(r["Nomenklatura adı/açıqlaması"])}</td>
+      <td>${esc(r["Ölçü vahidi"])}</td>
+      <td><input class="offerQty" data-idx="${r._idx}" type="number" value="${qty}" oninput="renderOfferItems()"></td>
+      <td><input class="offerPrice" data-idx="${r._idx}" type="number" value="${price}" oninput="renderOfferItems()"></td>
+      <td><input class="offerBrand" data-idx="${r._idx}" value="${esc(brand)}"></td>
+      <td class="center"><input class="offerComp" data-idx="${r._idx}" type="checkbox" ${compliant?"checked":""}></td>
+      <td>${(qty*price).toFixed(2)}</td>
+    </tr>`;
+  }).join("")+(rows.length?"":"<tr><td colspan='7'>RFQ sətri yoxdur</td></tr>")+"</tbody>";
+  renderCompareTable();
+  
+}
+function saveOffer(){
+  if(!offerRFQ.value){alert("RFQ seç");return}
+  const vendor=offerVendor.value.trim();
+  if(!vendor){alert("Təchizatçı yaz");return}
+  const no=offerRFQ.value;
+  const remaining=offers.map(normalizeOffer).filter(o=>!(o.rfqNo===no&&o.vendor===vendor));
+  const fresh=offerRows().map(r=>{
+    const q=document.querySelector(`.offerQty[data-idx="${r._idx}"]`);
+    const p=document.querySelector(`.offerPrice[data-idx="${r._idx}"]`);
+    const b=document.querySelector(`.offerBrand[data-idx="${r._idx}"]`);
+    const c=document.querySelector(`.offerComp[data-idx="${r._idx}"]`);
+    return {
+      rfqNo:no,vendor,
+      item:r["Nomenklatura adı/açıqlaması"],uom:r["Ölçü vahidi"],
+      qty:+(q?q.value:0)||0,price:+(p?p.value:0)||0,brand:(b?b.value:"").trim(),
+      compliant:!!(c&&c.checked),
+      currency:offerCurrency.value,lead:offerLead.value,incoterms:offerInc.value,payment:offerPayment.value,note:offerNote.value,date:offerDate.value,psIdx:r._idx
+    };
+  });
+  offers=[...remaining,...fresh].map(denormalizeOffer);
+  saveAll();renderOffers();updateOfferVendorList();renderCompareTable();alert("Təklif yadda saxlandı.");
+}
+function compareData(){
+  const no=offerRFQ.value;
+  const rows=offerRows();
+  const vendors=vendorsForRFQ(no);
+  return {no,rows,vendors};
+}
+function moneyFmt(v){
+  const n=+v||0;
+  return n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function mvBuildModel(){
+  const {no,rows,vendors}=compareData();
+  const activeVendors=vendors.slice(0,MV_VENDOR_SLOTS);
+  const rfq=rfqs.find(r=>r["RFQ №"]===no)||{};
+  const slotCount=MV_VENDOR_SLOTS;
+  const emptyCell=()=>({
+    offer:null,qty:0,unitPrice:0,currency:"AZN",rate:1,priceAzn:0,totalAzn:0,
+    compliant:false,lead:"",brand:"",payment:"",incoterms:"",date:"",note:""
+  });
+  const infoRows=rows.map((r,i)=>{
+    const perVendor=activeVendors.map(v=>{
+      const o=offerLookup(no,v,r);
+      const qty=o?o.qty:(+r["Yekun miqdar"]||0);
+      const unitPrice=o?o.price:0;
+      const currency=o?o.currency:"AZN";
+      const rate=fxRate(currency);
+      const priceAzn=unitPrice*rate;
+      const totalAzn=qty*priceAzn;
+      return {
+        offer:o||null,qty,unitPrice,currency,rate,priceAzn,totalAzn,
+        compliant:o?!!o.compliant:false,
+        lead:o?o.lead:"",
+        brand:o?o.brand:"",
+        payment:o?o.payment:"",
+        incoterms:o?o.incoterms:"",
+        date:o?o.date:"",
+        note:o?o.note:""
+      };
+    });
+    while(perVendor.length<slotCount) perVendor.push(emptyCell());
+    let win=-1,winVal=Number.POSITIVE_INFINITY;
+    perVendor.forEach((x,ix)=>{if(x.compliant&&x.totalAzn>0&&x.totalAzn<winVal){winVal=x.totalAzn;win=ix;}});
+    return {
+      idx:i+1,
+      code:`${i+1}-${pickVal(r,["S/bölmə","S/bölmə"])||"AZ"}-Protokol/`,
+      desc:pickVal(r,["Nomenklatura adı/açıqlaması","Nomenklatura adı/açıqlaması"]),
+      spec:"",
+      qty:+(pickVal(r,["Yekun miqdar"])||0),
+      uom:pickVal(r,["Ölçü vahidi","Ölçü vahidi"]),
+      perVendor,
+      winner:win
+    };
+  });
+  const vendorData=activeVendors.map((v,ix)=>{
+    const cells=infoRows.map(r=>r.perVendor[ix]);
+    const net=cells.reduce((a,x)=>a+x.totalAzn,0);
+    const vatFlag=true;
+    const addCost=0;
+    const discount=0;
+    const vat=vatFlag?(net+addCost-discount)*0.18:0;
+    const aznAmount=net+addCost-discount;
+    const gross=aznAmount+vat;
+    const suitable=cells.reduce((a,x)=>a+(x.compliant?x.totalAzn:0),0);
+    const planned=infoRows.reduce((a,r)=>a+(r.winner===ix?r.perVendor[ix].totalAzn*(vatFlag?1.18:1):0),0);
+    const baseOffer=offersForRFQ(no).find(o=>o.vendor===v)||{};
+    const hasAny=cells.some(x=>x.offer);
+    const techOk=cells.filter(x=>x.offer).every(x=>x.compliant);
+    return {
+      vendor:v,
+      label:vendorLabelWithCurrency(no,v),
+      vatFlag,
+      net,
+      addCost,
+      discount,
+      vat,
+      currency:baseOffer.currency||"AZN",
+      rate:fxRate(baseOffer.currency||"AZN"),
+      aznAmount,
+      gross,
+      suitable,
+      planned,
+      payment:baseOffer.payment||"",
+      incoterms:baseOffer.incoterms||"",
+      warranty:"-",
+      date:baseOffer.date||rfq["Tarix"]||today(),
+      docs:hasAny?"Uyğundur":"",
+      tech:techOk?"Uyğundur":"Uyğun deyil",
+      note:baseOffer.note||""
+    };
+  });
+  while(vendorData.length<slotCount){
+    vendorData.push({
+      vendor:"",
+      label:"",
+      vatFlag:false,
+      net:0,
+      addCost:0,
+      discount:0,
+      vat:0,
+      currency:"",
+      rate:0,
+      aznAmount:0,
+      gross:0,
+      suitable:0,
+      planned:0,
+      payment:"",
+      incoterms:"",
+      warranty:"",
+      date:"",
+      docs:"",
+      tech:"",
+      note:"",
+      placeholder:true
+    });
+  }
+  const plannedVendors=vendorData.filter(v=>v.planned>0).sort((a,b)=>b.planned-a.planned);
+  const awardText=plannedVendors.length
+    ? plannedVendors.map(v=>`${v.vendor} Şirkəti ilə ${moneyFmt(v.planned)} manat`).join("   ")
+    : "";
+  const negotiationText=plannedVendors.length>1
+    ? "Satınalma predmeti 2 və daha çox təchizatçı arasında bölünmüşdür"
+    : "";
+  return {no,rfq,rows:infoRows,vendors:vendorData,awardText,negotiationText};
+}
+function mvRenderTable(model,wrapTable){
+  const cols=5+model.vendors.length*6;
+  const vendorHead=model.vendors.map(v=>`<th colspan="6" class="mvh ${v.placeholder?'mvEmpty':''}">${esc(v.label||" ")}</th>`).join("");
+  const vendorSub=model.vendors.map(v=>`<th class="mvh2 ${v.placeholder?'mvEmpty':''}">Qiymət<br>${esc(v.currency||"")}</th><th class="mvh2 ${v.placeholder?'mvEmpty':''}">Qiymət<br>AZN</th><th class="mvh2 ${v.placeholder?'mvEmpty':''}">Təklif edilən<br>marka</th><th class="mvh2 ${v.placeholder?'mvEmpty':''}">Çatdırılma<br>müddəti</th><th class="mvh2 ${v.placeholder?'mvEmpty':''}">Uyğunluq</th><th class="mvh2 ${v.placeholder?'mvEmpty':''}">Cəm AZN</th>`).join("");
+  const bodyRows=model.rows.map(r=>{
+    const cells=r.perVendor.map((x,ix)=>{
+      const pv=model.vendors[ix]||{};
+      const emptyCls=pv.placeholder?" mvEmpty":"";
+      const compTxt=x.offer?(x.compliant?"TRUE":"FALSE"):"";
+      return `<td class="right${emptyCls}">${x.unitPrice?moneyFmt(x.unitPrice):""}</td><td class="right${emptyCls}">${x.priceAzn?moneyFmt(x.priceAzn):""}</td><td class="${emptyCls.trim()}">${esc(x.brand)}</td><td class="center${emptyCls}">${esc(x.lead)}</td><td class="center ${x.compliant?'good':'bad'}${emptyCls}">${compTxt}</td><td class="right bold${emptyCls}">${x.totalAzn?moneyFmt(x.totalAzn):""}</td>`;
+    }).join("");
+    return `<tr><td>${esc(r.code)}</td><td class="psname">${esc(r.desc)}</td><td>${esc(r.spec)}</td><td class="center">${esc(r.qty)}</td><td class="center">${esc(r.uom)}</td>${cells}</tr>`;
+  }).join("");
+  const rowByVendor=(label,getter,cls="")=>`<tr><td colspan="5" class="right bold">${label}</td>${model.vendors.map(v=>`<td colspan="6" class="center ${cls} ${v.placeholder?'mvEmpty':''}">${getter(v)}</td>`).join("")}</tr>`;
+  const markerRow=`<tr>${Array.from({length:cols},(_,i)=>`<th class="mvBlk">Column${i+1}</th>`).join("")}</tr>`;
+  const inner=`
+    <thead>
+      <tr><th>MV</th><th colspan="2" class="right">Sifariş №</th><th colspan="2" class="center">${esc(model.no)}</th><th colspan="${cols-5}" rowspan="5" class="mvCompany">İqlim EİM MMC</th></tr>
+      <tr><th></th><th colspan="2" class="right">Sorğu tarixi</th><th colspan="2" class="center">${esc(fmtDate(model.rfq["Tarix"]||today()))}</th></tr>
+      <tr><th></th><th colspan="2" class="right">Sifariş edən Müəssisə / Şəxs</th><th colspan="2" class="center">${esc(legal.value||"İqlim EİM")}</th></tr>
+      <tr><th></th><th colspan="2" class="right">Satınalma nümayəndəsi</th><th colspan="2" class="center">${esc(owner.value||"Abdullayev Tural")}</th></tr>
+      <tr><th></th><th colspan="2" class="right">Tarix</th><th colspan="2" class="center">${esc(fmtDate(today()))}</th></tr>
+      <tr><th colspan="${cols}" class="mvTitle">Təchizatçılar tərəfindən təqdim edilmiş təkliflərə dair məlumat vərəqəsi №&nbsp; MVRFQ- ${esc(model.no)}</th></tr>
+      <tr>
+        <th class="mvh2">№</th>
+        <th class="mvh2">Satınalma predmetinin təsviri</th>
+        <th class="mvh2">Açıqlaması</th>
+        <th class="mvh2">Miqdar</th>
+        <th class="mvh2">Ölçü vahidi</th>
+        ${vendorHead}
+      </tr>
+      <tr><th></th><th></th><th></th><th></th><th></th>${vendorSub}</tr>
+      ${markerRow}
+    </thead>
+    <tbody>
+      ${bodyRows}
+      ${rowByVendor("ƏDV varsa işarələnib",v=>v.vatFlag?"TRUE":"FALSE","bold")}
+      ${rowByVendor("Toplam məbləğ NET",v=>moneyFmt(v.net),"bold")}
+      ${rowByVendor("Əlavə xərclər (çatdırılma, quraşdırma və s.)",v=>moneyFmt(v.addCost))}
+      ${rowByVendor("Endirim",v=>moneyFmt(v.discount))}
+      ${rowByVendor("ƏDV 18%",v=>moneyFmt(v.vat))}
+      ${rowByVendor("Valyuta",v=>esc(v.currency))}
+      ${rowByVendor("Valyuta AZN Cari məzənnə",v=>moneyFmt(v.rate))}
+      ${rowByVendor("AZN ilə məbləğ",v=>moneyFmt(v.aznAmount),"moneyRed")}
+      ${rowByVendor("Ümumi məbləğ (ƏDV Daxil)",v=>moneyFmt(v.gross))}
+      ${rowByVendor("Uyğun pozisiyalar üzrə cəm qiymət:",v=>moneyFmt(v.suitable),"moneyBlue")}
+      ${rowByVendor("Alışı planlaşdırılan pozisiyalar üzrə cəm (Vergi daxil):",v=>v.planned?moneyFmt(v.planned):"","moneyGreen")}
+      ${rowByVendor("Ödəniş şərti",v=>esc(v.payment))}
+      ${rowByVendor("Çatdırılma şərti",v=>esc(v.incoterms))}
+      ${rowByVendor("Zəmanət",v=>esc(v.warranty))}
+      ${rowByVendor("Təkliflərin təqdim edilmə tarixi:",v=>esc(fmtDate(v.date)))}
+      ${rowByVendor("Təchizatçı sənədlərinin uyğunluğu:",v=>esc(v.docs))}
+      ${rowByVendor("Malların texniki uyğunluğu:",v=>`<span class="${v.tech==='Uyğun deyil'?'bad':''}">${esc(v.tech)}</span>`)}
+      ${rowByVendor("Qeydlər:",v=>esc(v.note))}
+      <tr><td colspan="${cols}" class="award"><b>Award to:</b> <span class="awardTxt">${esc(model.awardText)}</span></td></tr>
+      <tr><td colspan="${cols}" class="award"><b>Negotiation with:</b> ${esc(model.negotiationText)}</td></tr>
+      <tr><th colspan="2">Məsul şəxs / Tutduğu Vəzifə</th><th colspan="2">Satınalma üzrə Aparıcı Mütəxəssis</th><th colspan="${cols-4}" class="center">Satınalmalar şöbəsinin müdiri / Təchizat Departamentinin Direktoru</th></tr>
+      <tr><th colspan="2">Ad, Soyad</th><td colspan="2" class="center">${esc(owner.value||"Tural Abdullayev")}</td><td colspan="${cols-4}" class="center">Rafael İmanov / Tural Hidayətzadə</td></tr>
+      <tr><th colspan="2">İmza</th><td colspan="${cols-2}" style="height:52px"></td></tr>
+    </tbody>
+  `;
+  return wrapTable?`<table class="mvExact">${inner}</table>`:inner;
+}
+function renderCompareTable(){
+  const model=mvBuildModel();
+  if(!model.vendors.length){
+    compareTable.className="";
+    compareTable.innerHTML="<thead><tr><th>Müqayisə cədvəli</th></tr></thead><tbody><tr><td>Təklif saxlanandan sonra müqayisə burada görünəcək.</td></tr></tbody>";
+    return;
+  }
+  compareTable.className="mvExact";
+  compareTable.innerHTML=mvRenderTable(model,false);
+}
+function renderMVPrint(){}
+function printArea(target){
+  document.body.setAttribute("data-print-target",target);
+  setTimeout(()=>window.print(),60);
+  setTimeout(()=>document.body.removeAttribute("data-print-target"),800);
+}
+function printRFQ(){renderRFQPrint();printArea("rfq")}
+function exportMVExcel(){
+  const model=mvBuildModel();
+  const activeVendorCount=model.vendors.filter(v=>!v.placeholder).length;
+  if(!activeVendorCount){
+    alert("MV ixrac üçün əvvəl RFQ üzrə təklifləri yadda saxla.");
+    return;
+  }
+  const table=mvRenderTable(model,true);
+  const css=`
+    table.mvExact{background:#d9d9d9;font-family:"Times New Roman",serif;font-size:12px;width:100%;border-collapse:collapse;table-layout:fixed}
+    .mvExact th,.mvExact td{border:1px solid #222;padding:2px 4px;vertical-align:middle;mso-number-format:"\@";}
+    .mvTitle{font-size:32px;font-weight:700;background:#efefef;text-align:center}
+    .mvCompany{font-size:56px;font-weight:700;background:#efefef;text-align:center;line-height:1}
+    .mvh{background:#d7d7d7;font-weight:700;text-align:center}
+    .mvh2{background:#e3e3e3;font-weight:700;text-align:center}
+    .mvBlk{background:#000;color:#fff;font-size:9px;font-weight:700;text-align:center}
+    .mvEmpty{background:#ececec}
+    .moneyRed{color:#c00000;font-weight:700;mso-number-format:"#,##0.00";}
+    .moneyBlue{color:#0070c0;font-weight:700;mso-number-format:"#,##0.00";}
+    .moneyGreen{color:#00a651;font-weight:700;mso-number-format:"#,##0.00";}
+    .award{background:#efefef}
+    .awardTxt{color:#c00000;font-style:italic;font-weight:700}
+    .bad{color:#c00000;font-style:italic}
+    .good{font-weight:700}
+    .center{text-align:center}.right{text-align:right}.bold{font-weight:700}
+    .psname{white-space:normal}
+  `;
+  const excelHtml=`<!doctype html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>MV</x:Name><x:WorksheetOptions><x:DisplayGridlines/><x:FitToPage/><x:Print><x:FitWidth>1</x:FitWidth><x:FitHeight>0</x:FitHeight></x:Print></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+<style>${css}</style>
+</head>
+<body>${table}</body></html>`;
+  const safeNo=String(model.no||"MV").replace(/[\/:*?"<>|]/g,"_");
+  download(`MVRFQ_${safeNo}.xls`,excelHtml,"application/vnd.ms-excel;charset=utf-8");
+}
+function renderOffers(){
+  const h=[{key:"RFQ №",label:"RFQ №"},{key:"Vendor",label:"Təchizatçı"},{key:"Təklif tarixi",label:"Təklif tarixi"},{key:"Nomenklatura adı/açıqlaması",label:"Nomenklatura adı/açıqlaması"},{key:"Ölçü vahidi",label:"Ölçü vahidi"},{key:"Təklif miqdarı",label:"Təklif miqdarı"},{key:"Vahid qiymət",label:"Vahid qiymət"},{key:"Valyuta",label:"Valyuta"},{key:"Marka",label:"Marka"},{key:"Uyğunluq",label:"Uyğunluq"},{key:"Cəm",label:"Cəm"},{key:"Çatdırılma müddəti",label:"Çatdırılma müddəti"},{key:"Incoterms",label:"Incoterms"},{key:"Ödəniş şərti",label:"Ödəniş şərti"},{key:"Qeyd",label:"Qeyd"}];
+  offersTable.innerHTML="<thead><tr>"+h.map(x=>`<th>${x.label}</th>`).join("")+"</tr></thead><tbody>"+
+  offers.map(r=>"<tr>"+h.map(x=>`<td class="${x.key==='Nomenklatura adı/açıqlaması'?'psname':''}">${esc(x.key==='Uyğunluq'?(r[x.key]===false?'Uyğun deyil':'Uyğundur'):r[x.key])}</td>`).join("")+"</tr>").join("")+
+  (offers.length?"":"<tr><td colspan='15'>Təklif yoxdur</td></tr>")+"</tbody>";
+}
+function clearOffers(){if(confirm("Təkliflər silinsin?")){offers=[];saveAll();renderOffers();renderCompareTable();}}
+function renderPS(){
+  psStatus.textContent=psRows.length+" sətir";
+  psTable.innerHTML="<thead><tr>"+psHeaders.map(h=>`<th>${h}</th>`).join("")+"</tr></thead><tbody>"+psRows.map((r,i)=>"<tr>"+psHeaders.map(h=>`<td class="${h==='Nomenklatura adı/açıqlaması'?'psname':''}" contenteditable="true" onblur="psRows[${i}]['${h.replaceAll("'","\\'")}']=this.innerText;saveAll()">${esc(r[h])}</td>`).join("")+"</tr>").join("")+(psRows.length?"":"<tr><td colspan='42'>Məlumat yoxdur</td></tr>")+"</tbody>";
+}
+function csv(rows,headers){return [headers.join(";")].concat(rows.map(r=>headers.map(h=>`"${String(r[h]??"").replaceAll('"','""')}"`).join(";"))).join("\n")}
+function download(name,content,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
+function exportPS(){download("PS_IQLIM_export.csv",csv(psRows,psHeaders),"text/csv;charset=utf-8")}
+function clearPS(){if(confirm("PS məlumatları silinsin?")){psRows=[];saveAll();renderAll();}}
+function renderAll(){renderForm();renderOverview();renderRFQSource();renderRFQList();renderRFQPrint();renderOfferItems();renderOffers();renderCompareTable();renderPS();}
+init();
+</script>
+</body>
+</html>
+
+
+
+
